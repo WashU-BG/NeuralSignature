@@ -1,0 +1,34 @@
+y,Group,Expanded,Order
+tfmri_nb_all_beh_c2b_rate,N-back performance,2-Back Accuracy,1
+tfmri_nb_all_beh_c0b_rate,N-back performance,0-Back Accuracy,2
+cbcl_scr_syn_totprob_r,Psychopathology,Total Problems (CBCL),2
+cbcl_scr_syn_internal_r,Psychopathology,Internalizing Factor (CBCL),3
+cbcl_scr_syn_anxdep_r,Psychopathology,Anxious/Depressed (CBCL),4
+cbcl_scr_syn_withdep_r,Psychopathology,Withdrawn/Depressed (CBCL),5
+cbcl_scr_syn_somatic_r,Psychopathology,Somatic Prob (CBCL),6
+cbcl_scr_dsm5_anxdisord_r,Psychopathology,DSM-5 Anxiety Prob (CBCL),7
+cbcl_scr_dsm5_depress_r,Psychopathology,DSM-5 Depression Prob (CBCL),8
+cbcl_scr_dsm5_somaticpr_r,Psychopathology,DSM-5 Somatic Prob (CBCL),9
+cbcl_scr_syn_external_r,Psychopathology,Externalizing Factor (CBCL),10
+cbcl_scr_syn_aggressive_r,Psychopathology,Aggressive Behavior (CBCL),11
+cbcl_scr_syn_rulebreak_r,Psychopathology,Rule-breaking Behavior (CBCL),12
+cbcl_scr_dsm5_conduct_r,Psychopathology,DSM-5 Conduct Prob (CBCL),13
+cbcl_scr_dsm5_opposit_r,Psychopathology,DSM-5 Opposit Defiant Prob (CBCL),14
+cbcl_scr_syn_attention_r,Psychopathology,Attention Prob (CBCL),15
+cbcl_scr_dsm5_adhd_r,Psychopathology,DSM-5 ADHD Prob (CBCL),16
+cbcl_scr_07_ocd_r,Psychopathology,Obsess-comp Prob (CBCL),17
+cbcl_scr_07_sct_r,Psychopathology,Sluggish Cog Tempo (CBCL),18
+cbcl_scr_07_stress_r,Psychopathology,Stress Prob (CBCL),19
+cbcl_scr_syn_social_r,Psychopathology,Social Prob (CBCL),20
+cbcl_scr_syn_thought_r,Psychopathology,Thought Prob (CBCL),21
+pps_y_ss_number,Psychopathology,Psychotic-like Experiences (PQ-BC),22
+nihtbx_totalcomp_agecorrected,Cognition,Total Composite,23
+nihtbx_fluidcomp_agecorrected,Cognition,Fluid Intelligence,24
+nihtbx_cryst_agecorrected,Cognition,Crystalized Intelligence,25
+nihtbx_list_agecorrected,Cognition,List Sorting Working Memory,26
+nihtbx_picture_agecorrected,Cognition,Picture Sequence Memory,27
+nihtbx_flanker_agecorrected,Cognition,Flanker Inhibitory Control,28
+nihtbx_cardsort_agecorrected,Cognition,Dimensional Change Card Sort,29
+nihtbx_pattern_agecorrected,Cognition,Pattern Comparison,30
+nihtbx_picvocab_agecorrected,Cognition,Picture Vocabulary,31
+nihtbx_reading_agecorrected,Cognition,Reading Recognition,32
