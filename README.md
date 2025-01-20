@@ -55,15 +55,22 @@ In order:
 ## 6. Simulations
 
 1. bootstrap_samplesize - bootstrap sample size neural signature
-2. bootstrap_samplesize_ML_try2 - bootstrap sample size elastic net
+2. bootstrap_samplesize_ML_try2 - bootstrap sample size for elastic net
 3. plot_bootstraps      - plot bootstrap results
 
-## 7. Other
+## 7. Synthetic Data
+
+1. setup_sims - write out simulation parameters, for use with a HPC
+2. run_sims_cluster2 - simple simulations of a neural signature with synthetic data
+3. run_sims_cluster_complex - more realistic, and complex, simulations of a neural signature with synthetic data
+4. sim_plots - Plot results of synthetic data simulations
+
+## 8. Other
 
 1. difference_scores_example - example of difference scores and low reliability
 2. VariableNames - Expanded variable names for plotting 
 3. Atlas_regions - Region names for plotting with {ggseg}
 
-### 8. Making new predictions
+### 9. Making new predictions
 
 1. Example_prediction - demonstrates how to use our published elastic-net weights to generate neural signature predictions in a new data set. 
