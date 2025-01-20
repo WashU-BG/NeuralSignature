@@ -71,6 +71,6 @@ In order:
 2. VariableNames - Expanded variable names for plotting 
 3. Atlas_regions - Region names for plotting with {ggseg}
 
-### 9. Making new predictions
+## 9. Making new predictions
 
 1. Example_prediction - demonstrates how to use our published elastic-net weights to generate neural signature predictions in a new data set. 
