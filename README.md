@@ -36,7 +36,7 @@ In order:
 5. region_reliability   - regional reliability
 6. region_regressions   - regional individual difference associations
 7. regression_plot      - plot regression results
-8. reliability_plot     - plot reliability results
+8. new_reliability_plot - plot reliability results
 9. map_comparisons      - correlation of main-effect maps with regional association maps
 10. rho_p                - significance of the correlations between main-effect and regional association maps
 11. plot_all_correlationmaps - plot all correlations between main-effect and regional association maps
