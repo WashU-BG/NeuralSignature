@@ -62,6 +62,11 @@ out = foreach(i = 1: length(variables),.packages = c("dplyr","fitdistrplus"),.co
 stopCluster(cl)
 registerDoSEQ()
 
+write.csv(file = paste(base_dir,"Final/map_correlations.csv",sep=""),x = out)
+
+
+out = fread(paste(base_dir,"Final/map_correlations.csv",sep=""),data.table = F)
+
 out$pfdr = p.adjust(out$p_robust,method = "fdr")
 
 # 
@@ -121,21 +126,26 @@ plot(ML_regressions$Estimate,ML_regressions$cor)
 plot(ML_regressions$Estimate,ML_regressions$fdr)
 
 
-p1=ggplot(ML_regressions,aes(x = Estimate,y = fdr,fill=Group))+
-  geom_hline(yintercept = 0,linetype="dashed")+
+p1=ggplot(ML_regressions,aes(x = (Estimate),y = fdr,fill=Group))+
+ # geom_hline(yintercept = 0,linetype="dashed")+
   geom_vline(xintercept = 0,linetype="dashed")+
+  
+  scale_fill_viridis_d(option = "C",begin = .1,end = .9)+
   
   scale_x_continuous(limits = c(-.15,.46))+
   geom_point(shape=21,size=2)+
   
   xlab(label = "Signature association")+
-  ylab(label = "Percent fdr-significant regions")+
+  ylab(label = "\nPercent fdr-significant regions")+
   theme_bw()+theme(legend.title = element_blank(),aspect.ratio=1)
 p1
+
+
 p2=ggplot(ML_regressions,aes(x = (Estimate),y = (cor) ,fill=Group))+
   geom_point(shape=21,size=2)+
   scale_x_continuous(limits = c(-.15,.46))+
   scale_y_continuous(limits = c(-1,1))+
+  scale_fill_viridis_d(option = "C",begin = .1,end = .9)+
   
   xlab(label = "Signature association")+
   ylab(label = "Map correlation")+
@@ -144,9 +154,12 @@ p2=ggplot(ML_regressions,aes(x = (Estimate),y = (cor) ,fill=Group))+
   geom_hline(yintercept = 0,linetype="dashed")+
   theme_bw()+theme(legend.position = "none",legend.title = element_blank(),aspect.ratio=1)
 p2
+
 p3=ggplot(ML_regressions,aes(x = rank(Estimate),y = rank(cor) ,fill=Group))+
   geom_point(shape=21,size=2)+
   #scale_x_continuous(limits = c(-.15,.45))+
+  scale_fill_viridis_d(option = "C",begin = .1,end = .9)+
+  
   geom_smooth(formula = 'y~x',method = 'lm',se = FALSE,color="black",inherit.aes = FALSE,aes(x = rank(Estimate),y = rank(cor)))+
   xlab(label = "Signature association\nrank ordered")+
   ylab(label = "Map correlation\nrank ordered")+
@@ -156,7 +169,7 @@ p3
 p_all = ggarrange(p2,p3,p1,ncol=3,legend = "top",common.legend = TRUE)
 p_all
 
-cor(x = rank(ML_regressions$Estimate),y = rank(ML_regressions$cor) )
+ cor(x = rank(ML_regressions$Estimate),y = rank(ML_regressions$cor) )
 plot(ML_regressions$cor,ML_regressions$fdr)
 
 
@@ -198,7 +211,7 @@ task_effects = ggplot(data = dat.plot,aes(fill = Estimate))+
   scale_fill_gradientn(colours = J(n = 512),na.value = "white",
                        limits = c(-0.04,0.04),breaks=seq(-0.04,0.04,by=0.02),
                        guide = guide_colorbar( frame.colour = "black",
-                                                barwidth = 12,
+                                               # barwidth = 12,
                                                # barheight =1.5,
                                                draw.ulim = T,
                                                title.position = "top",
@@ -209,8 +222,8 @@ task_effects = ggplot(data = dat.plot,aes(fill = Estimate))+
                        ))+
   
   theme_void()+
-  theme(legend.position = "top")+
-  labs(fill =   "Association with Attention Problems" )
+  theme(legend.position = "right")+
+  labs(fill =   "Attention Problems" )
 task_effects
 
 task_effects2 = ggplot(data = dat.plot,aes(fill = Estimate))+
@@ -222,7 +235,7 @@ task_effects2 = ggplot(data = dat.plot,aes(fill = Estimate))+
   scale_fill_gradientn(colours = J(n = 512),na.value = "white",
                        limits = c(-0.04,0.04),breaks=seq(-0.04,0.04,by=0.02),
                        guide = guide_colorbar( frame.colour = "black",
-                                                barwidth = 12,
+                                               # barwidth = 12,
                                                # barheight =1.5,
                                                draw.ulim = T,
                                                title.position = "top",
@@ -233,11 +246,11 @@ task_effects2 = ggplot(data = dat.plot,aes(fill = Estimate))+
                        ))+
   
   theme_void()+
-  theme(legend.position = "top")+
-  labs(fill =   "Association with Attention Problems" )
+  theme(legend.position = "right")+
+  labs(fill =   "Attention Problems" )
 task_effects2
 
-task_effects_all   = ggarrange(task_effects,task_effects2,ncol = 2,common.legend = T,widths = c(6,1))
+task_effects_all   = ggarrange(task_effects,task_effects2,ncol = 2,common.legend = T,widths = c(6,1),legend = "right")
 task_effects_all
 
 task_all_full.map = fread(paste(base_dir,"fulltaskmap.csv",sep=""),data.table = F)
@@ -258,7 +271,7 @@ attn_comparison1 = ggplot(data = dat.plot,aes(x = Estimate,y=beta))+
   # scale_x_continuous(limits = c(-60,60),breaks = seq(-60,60,20))+
   
   #ggtitle(label = "Run 1 vs. Run 2: Baseline")+
-   xlab(label = "Association with Attention Problems")+
+   xlab(label = "Association with\nAttention Problems")+
    ylab(label = "Main effect of task")+
   #annotate("text",x = -50,y = 55,label = "r = 0.99",size=4)+
   #annotate("text",x = -50,y = 50,label = expression(paste("p=2.4x",10^{-7},sep="")),size=4)+
@@ -291,7 +304,7 @@ task_effects = ggplot(data = dat.plot,aes(fill = beta))+
   scale_fill_gradientn(colours = J(n = 512),na.value = "white",
                        limits = c(-0.25,0.25),breaks=seq(-0.2,0.2,by=0.1),
                        guide = guide_colorbar( frame.colour = "black",
-                                               barwidth = 12,
+                                               #barwidth = 12,
                                                # barheight =1.5,
                                                draw.ulim = T,
                                                title.position = "top",
@@ -302,8 +315,8 @@ task_effects = ggplot(data = dat.plot,aes(fill = beta))+
                        ))+
   
   theme_void()+
-  theme(legend.position = "top")+
-  labs(fill =   "Main effect of task - 2-back > 0-back" )
+  theme(legend.position = "right")+
+  labs(fill =   "2-back > 0-back   " )
 task_effects
 
 task_effects2 = ggplot(data = dat.plot,aes(fill = beta))+
@@ -315,7 +328,7 @@ task_effects2 = ggplot(data = dat.plot,aes(fill = beta))+
   scale_fill_gradientn(colours = J(n = 512),na.value = "white",
                        limits = c(-0.25,0.25),breaks=seq(-0.2,0.2,by=0.1),
                        guide = guide_colorbar( frame.colour = "black",
-                                               barwidth = 12,
+                                              # barwidth = 12,
                                                # barheight =1.5,
                                                draw.ulim = T,
                                                title.position = "top",
@@ -326,11 +339,11 @@ task_effects2 = ggplot(data = dat.plot,aes(fill = beta))+
                        ))+
   
   theme_void()+
-  theme(legend.position = "top")+
-  labs(fill =   "Main effect of task - 2-back > 0-back" )
+  theme(legend.position = "right")+
+  labs(fill =   "2-back > 0-back   " )
 task_effects2
 
-task_effects_main   = ggarrange(task_effects,task_effects2,ncol = 2,common.legend = T,widths = c(6,1))
+task_effects_main   = ggarrange(task_effects,task_effects2,ncol = 2,common.legend = T,widths = c(6,1),legend="right")
 task_effects_main
 
 
@@ -342,14 +355,17 @@ p4a = ggarrange(p3,p1,ncol=2,nrow=1,common.legend = TRUE,labels = c("E","F"))
 p4a
 p4b = ggarrange(attn_comparison1,p2,ncol=2,nrow=1,labels = c("C","D"))
 
+p4c =  ggarrange(attn_comparison1,p2,p3,p1,ncol=4,nrow=1,labels = c("C","D","E","F"),legend="top",common.legend = TRUE)
+p4c
+
 p4 = ggarrange(p4b,p4a,nrow=2,heights = c(1,1.2))
 p4
-example1  =  ggarrange(task_effects_main,task_effects_all,p4,nrow = 3,heights = c(1,1,3),labels = c("A","B",""))
+example1  =  ggarrange(task_effects_main,task_effects_all,p4c,nrow = 3,heights = c(.75,.75,1.4),labels = c("A","B",""))
 example1
 
 
-ggsave(plot = example1,filename = paste(base_dir,"Final/map_comparisons.jpeg",sep = ""),dpi = 500,width = 6,height =8 )
-ggsave(plot = example1,filename = paste(base_dir,"Final/map_comparisons.pdf",sep = ""),dpi = 500,width = 6,height =8 )
-ggsave(plot = example1,filename = paste(base_dir,"Final/map_comparisons.png",sep = ""),dpi = 500,width = 6,height =8 )
-ggsave(plot = example1,filename = paste(base_dir,"Final/map_comparisons.bmp",sep = ""),dpi = 500,width = 6,height =8 )
-ggsave(plot = example1,filename = paste(base_dir,"Final/map_comparisons.tiff",sep = ""),dpi = 500,width = 6,height =8 )
+ggsave(plot = example1,filename = paste(base_dir,"Final/map_comparisons.jpeg",sep = ""),dpi = 500,width = 9,height =6 )
+ggsave(plot = example1,filename = paste(base_dir,"Final/map_comparisons.pdf",sep = ""),dpi = 500,width = 9,height =6 )
+ggsave(plot = example1,filename = paste(base_dir,"Final/map_comparisons.png",sep = ""),dpi = 500,width = 9,height =6 )
+ggsave(plot = example1,filename = paste(base_dir,"Final/map_comparisons.bmp",sep = ""),dpi = 500,width = 9,height =6 )
+ggsave(plot = example1,filename = paste(base_dir,"Final/map_comparisons.tiff",sep = ""),dpi = 500,width = 9,height =6 )
