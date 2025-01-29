@@ -1,6 +1,6 @@
 # NeuralSignature
 
-Contains code for the manuscript "Neural signatures of task fMRI effects enhances sensitivity to cognitive and mental health associations", doi: xxx. 
+Contains code for the manuscript "Enhancing task fMRI individual difference research with neural signatures", doi: xxx. 
 
 Uses ABCD 5.1 - set wd or 'base_dir' to appropriate path in each file
 
